@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">CriminalIntent</string>
+    <string name="crime_details">Details</string>
+    <string name="crime_status">Is crime solved?</string>
+    <string name="choose_date">Choose Date</string>
+    <string name="choose_criminal">Choose Criminal</string>
+    <string name="hint_title">Title</string>
+    <string name="create_crime">Create</string>
+    <string name="no_date">No Date</string>
+    <string name="no_title_error">Title cannot be blank</string>
+</resources>
