@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.knoxpo.criminalintent.R;
 import com.knoxpo.criminalintent.activities.DetailActivity;
+import com.knoxpo.criminalintent.activities.PagerActivity;
 import com.knoxpo.criminalintent.models.Crime;
 import com.knoxpo.criminalintent.models.CrimeLab;
 
@@ -34,7 +35,8 @@ public class MainFragment extends Fragment {
 
     private static final int
             REQUEST_NEW_CRIME = 0,
-            REQUEST_UPDATE_CRIME = 1;
+            REQUEST_UPDATE_CRIME = 1,
+            REQUEST_UPDATE_CRIME_NEW = 2;
 
     private RecyclerView mCrimesRV;
     private TextView mEmptyTV;
@@ -97,6 +99,9 @@ public class MainFragment extends Fragment {
             UUID crimeId = (UUID) data.getSerializableExtra(DetailActivity.EXTRA_CRIME_ID);
             Crime crime = CrimeLab.getInstance(getActivity()).getCrime(crimeId);
             mAdapter.notifyItemChanged(mCrimes.indexOf(crime));
+            updateUI();
+        } else if(requestCode == REQUEST_UPDATE_CRIME_NEW){
+            mAdapter.notifyDataSetChanged();
             updateUI();
         }
     }
@@ -167,10 +172,14 @@ public class MainFragment extends Fragment {
 
         @Override
         public void onClick(View view) {
-            Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
+            /*Intent detailIntent = new Intent(getActivity(), DetailActivity.class);
             detailIntent.putExtra(DetailActivity.EXTRA_CRIME_ID, mCrime.getId());
             detailIntent.putExtra(DetailActivity.EXTRA_POSITION,getAdapterPosition());
-            startActivityForResult(detailIntent, REQUEST_UPDATE_CRIME);
+            startActivityForResult(detailIntent, REQUEST_UPDATE_CRIME);*/
+
+            Intent pageIntent = new Intent(getActivity(), PagerActivity.class);
+            pageIntent.putExtra(PagerActivity.EXTRA_CRIME_ID, mCrime.getId());
+            startActivityForResult(pageIntent,REQUEST_UPDATE_CRIME_NEW);
         }
     }
 
